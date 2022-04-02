@@ -1,0 +1,36 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "coffeedeficient/multi-docker-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "server",
+            "image": "coffeedeficient/multi-docker-server",
+            "hostname": "api",
+            "essential": false            
+        },
+        {
+            "name": "worker",
+            "image": "coffeedeficient/multi-docker-worker",
+            "hostname": "worker",
+            "essential": false            
+        },
+        {
+            "name": "nginx",
+            "image": "coffeedeficient/multi-nginx",
+            "hostname": "nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort":80
+                }
+            ],
+            "links": ["client", "server"]
+        }
+    ]
+}
